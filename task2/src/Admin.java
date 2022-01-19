@@ -14,7 +14,8 @@ public class Admin extends User{
         do{
             System.out.println("1. ViewApplications");
             System.out.println("2. View Market");
-            System.out.println("3. logout/quit app");
+            System.out.println("3. View Order Books");
+            System.out.println("4. logout/quit app");
 
             try {
                 input = human.nextInt();
@@ -23,7 +24,7 @@ public class Admin extends User{
                 human.nextLine();
                 System.out.println("please only enter a number");
             }
-        }while(input < 1 || input > 3);
+        }while(input < 1 || input > 4);
 
         return input;
     }    
