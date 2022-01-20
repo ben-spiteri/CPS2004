@@ -38,7 +38,7 @@ public class Main{
             myUser.addCoin("Ethereum", 16);
 
         }
-        if(id == 102){
+        else if(id == 102){
             myUser.initBalance(balance.get(1));
 
             myUser.addCoin("Bitcoin", 5);
@@ -131,7 +131,10 @@ public class Main{
 
         int input = 0;
 
+        //loop until the users quits the App
         do{
+            
+            //display the menu
             do{
 
                 System.out.println("1. Trader Login");
@@ -148,26 +151,33 @@ public class Main{
                 }
             }while (input > 4 || input < 1);
     
-    
+            
+
+            //Trader sign in
             if(input == 1){
                 
+                //calling the user log in function
                 int accID = (int)userLogin();
 
+                //if a valid account id is returned
                 if(accID > -1){
-    
+                    
+                    //create new Trader object and initialize it
                     Trader myTrader = new Trader(accID);
                     
                     initUserAccount(accID, myTrader);
 
-
+                    //loop with user menu until logout
                     int i = 0;
                     do{
+                        
                         if(i == 1){
                             myTrader.printWallet();
                         }
                         else if(i == 2){
                             myExchange.printMarket();
                         }
+                        //user chooses market order
                         else if(i == 3){
                             int input3 = 0;
                             do{
@@ -243,6 +253,7 @@ public class Main{
                                 }
                             }
                         }
+                        //users ask for list order
                         else if(i == 4){
                            
                             int input4 = 0;
@@ -326,51 +337,55 @@ public class Main{
                     System.out.println("App has been locked due to too many false sign in!");
                 }
             }
-    
+            //admin login
             else if(input == 2){
                 int accID = adminLogin();
     
-                Admin myAdmin = new Admin(accID);
+                if(accID > -1){
+                    Admin myAdmin = new Admin(accID);
     
-                int i = 0;
-                do{
-                    if(i == 1){
-                        System.out.println("Pending Registrations===================================");
-                        for(int index = 0; index < requesteduserID.size(); index++){
-                            System.out.println("Request number: " + index + 1);
-                            System.out.println("User ID ; " + requesteduserID.get(index));
-                            System.out.println("balance ; " + requestedbalance.get(index));
-                        }
-    
-                        System.out.println("enter Index of registration to accept or 0 to decline all");
-                        int accept = human.nextInt();
-    
-                        if(accept == 0){
-                            requesteduserID.clear();
-                            requestedbalance.clear();
-                            requestedpassword.clear();
-                        }
-                        else if (accept > 0){
-                            if(requesteduserID.get(accept-1) > -1){
-                                userID.add(requesteduserID.get(accept-1));
-                                password.add(requestedpassword.get(accept-1));
-    
-                                requesteduserID.remove(accept-1);
-                                requestedpassword.remove(accept-1);
-                                requestedbalance.remove(accept-1);
+                    int i = 0;
+                    do{
+                        //admin chooses view registations
+                        if(i == 1){
+                            System.out.println("Pending Registrations===================================");
+                            for(int index = 0; index < requesteduserID.size(); index++){
+                                System.out.println("Request number: " + (index + 1));
+                                System.out.println("User ID ; " + requesteduserID.get(index));
+                                System.out.println("balance ; " + requestedbalance.get(index));
                             }
+                            
+                            System.out.println("enter Index of registration to accept or 0 to decline all");
+                            int accept = human.nextInt();
+        
+                            if(accept == 0){
+                                requesteduserID.clear();
+                                requestedbalance.clear();
+                                requestedpassword.clear();
+                            }
+                            else if (accept > 0){
+                                if(requesteduserID.get(accept-1) > -1){
+                                    userID.add(requesteduserID.get(accept-1));
+                                    password.add(requestedpassword.get(accept-1));
+        
+                                    requesteduserID.remove(accept-1);
+                                    requestedpassword.remove(accept-1);
+                                    requestedbalance.remove(accept-1);
+                                }
+                            }
+        
                         }
-    
-                    }
-                    else if(i == 2){
-                        myExchange.printMarket();
-                    }
-                    else if(i == 3){
-                        myExchange.printOrderBooks();
-                    }
-                }while((i = myAdmin.adminMenu()) != 4);
+                        else if(i == 2){
+                            myExchange.printMarket();
+                        }
+                        else if(i == 3){
+                            myExchange.printOrderBooks();
+                        }
+                    }while((i = myAdmin.adminMenu()) != 4);
+                }
             }
-               
+            
+            //Regiser as new user is selected
             else if(input == 3){
                 int newUserID = (userID.get(userID.size()-1)) + 1 + (requesteduserID.size() % 100);
                 System.out.println("Please Enter a Password");
