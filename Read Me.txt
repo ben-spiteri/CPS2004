@@ -1,0 +1,7 @@
+This file contains tasks 1-3 for the 2021-22 CPS2004 assignment
+
+Task1 - create a directed a cyclic graph that allows for deletion of branches
+
+task2 - create a Crypto coin exchange that facilitates different user profiles
+
+task3 - create your own variable type that facilitates integer values of up to size 2048 bits
