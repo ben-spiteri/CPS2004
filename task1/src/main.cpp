@@ -56,6 +56,7 @@ void node<T>::get_edge(list<edge<T>> &edges) const{
 //===============================================================================================================
 
 //constructor for DAG takes list of edges as paramater
+//cycles aren't always detected
 template <typename T>
 DAG<T>::DAG(const list<edge<T>> &edges){
     //for each edge in the edges list
